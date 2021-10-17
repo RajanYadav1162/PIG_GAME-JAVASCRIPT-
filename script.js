@@ -85,9 +85,11 @@ const generateRandomAndAssignToCurrent = (isHoldPressed = false) => {
   }
   if (g1 >= 30) {
     alert('PLAYER 1 IS WINNNER!');
+    setEverythingToZero();
   }
   if (g2 >= 30) {
     alert('PLAYER 2 IS WINNNER!');
+    setEverythingToZero();
   }
 };
 
