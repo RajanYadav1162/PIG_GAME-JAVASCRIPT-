@@ -22,24 +22,26 @@ const active1 = document.querySelector('#active1');
 
 const active2 = document.querySelector('#active2');
 // end active2 section
+
 let c1, g1, c2, g2, chance;
-c1 = c2 = g1 = g2 = 0;
-chance = 1;
-
-// .......player 1........
-
-// function to genrate random cube and and assign to current
-//  OR RollDice btn handler
+const init = () => {
+  c1 = c2 = g1 = g2 = 0;
+  chance = 1;
+  cardImg.style.display = 'none';
+};
 const generateRandomAndAssignToCurrent = (isHoldPressed = false) => {
+  cardImg.style.display = 'block';
   cardImg.classList.add('rotate-center');
 
   setTimeout(() => {
     cardImg.classList.remove('rotate-center');
   }, 500);
+
   if (!isHoldPressed) {
     c1 = Math.floor(Math.random() * 6) + 1;
     cardImg.src = `dice-${c1}.png`;
   } else {
+    cardImg.style.display = 'none';
     if (chance === 1) {
       chance = 2;
       active1.classList.remove('player--active');
@@ -88,6 +90,22 @@ const generateRandomAndAssignToCurrent = (isHoldPressed = false) => {
     alert('PLAYER 2 IS WINNNER!');
   }
 };
+
+const setEverythingToZero = () => {
+  init();
+  current2.textContent = 0;
+  current1.textContent = 0;
+  global2.textContent = 0;
+  global1.textContent = 0;
+  active2.classList.remove('player--active');
+  active1.classList.add('player--active');
+};
+
+init();
+
+const newBtnHandler = () => setEverythingToZero();
+
+newBtn.addEventListener('click', newBtnHandler);
 
 holdBtn.addEventListener('click', () => generateRandomAndAssignToCurrent(true));
 
